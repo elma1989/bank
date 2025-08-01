@@ -31,6 +31,31 @@ export class Account {
         console.log(`Interes Charges: ${this.inerestCharges*100} %`);
         this.updateBalance();
     }
+
+    calcMonthly() {
+        return Math.round(this.balance * this.inerestCharges / 12 * 100) / 100;
+    }
     // #endregion
 }
+
+export class SaveAccount extends Account {
+    constructor (owner, balance) {
+        if (balance <= 0) {
+            console.error('You have to pay in Money.');
+            throw new Error('Account was not created!');
+        }
+        super(owner, 3, 'Save-Account');
+        this.balance = balance;
+    }
+
+    payOut(value) {
+        if (this.balance - value >= 0) {
+            super.payOut(value);
+        } else {
+            console.error('Pay-Out not possible.');
+            this.updateBalance();
+        }
+    }
+}
+
 
