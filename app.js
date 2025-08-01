@@ -1,11 +1,11 @@
-import { Account, SaveAccount } from './account.js'
+import { Account, SaveAccount, GiroAccount } from './account.js'
 
 const accOne = new Account('Max Mustermann', 3, 'Giro-Konto');
 accOne.payIn(100);
 accOne.payOut(50);
 accOne.getInfo();
 
-console.log(accOne.calcMonthly());
+console.log(`Monthly interest charges: ${accOne.calcMonthly()} €`);
 
 let accTwo = null;
 
@@ -19,3 +19,9 @@ if (accTwo) {
     accTwo.getInfo();
     accTwo.payOut(500);
 }
+
+const accTree = new GiroAccount('John Doe');
+accTree.getInfo();
+accTree.payIn(1000);
+accTree.payOut(2000);
+accTree.payOut(2000);

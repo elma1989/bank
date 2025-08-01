@@ -58,4 +58,28 @@ export class SaveAccount extends Account {
     }
 }
 
+export class GiroAccount extends Account {
+    dispoLimit = 2500;
+    disopInterestCharges = 0.15;
 
+    constructor(owner) {
+        super(owner, 0.5, 'Giro-Account');
+    
+    }
+
+    // #region Methods
+    payOut (value) {
+        if (this.balance - value >= -this.dispoLimit) {
+            super.payOut(value);
+        } else {
+            console.error('Pay-Out not possible.');
+            this.updateBalance();
+        }
+    }
+
+    getInfo() {
+        super.getInfo();
+        console.log(`Dispo-Limit: ${this.dispoLimit}`);
+        console.log(`Dispo-Interest-Charges: ${this.disopInterestCharges * 100}%`);
+    }
+}
